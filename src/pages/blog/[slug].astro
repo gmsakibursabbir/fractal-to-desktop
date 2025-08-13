@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Export getStaticPaths so Astro knows all slugs
+export async function getStaticPaths() {
+  // Import all markdown files here inside the function
+  const allPostFiles = import.meta.glob("../../posts/*.md", { eager: true });
+
+  // Return array of params for each post
+  return Object.entries(allPostFiles).map(([path, post]) => ({
+    params: {
+      slug: path.split("/").pop().replace(".md", ""),
+    },
+  }));
+}
+
+// Get the slug from the URL
+const { slug } = Astro.params;
+
+// Import all posts again to find the current one
+const allPostFiles = import.meta.glob("../../posts/*.md", { eager: true });
+
+const post = Object.entries(allPostFiles)
+  .map(([path, p]) => ({
+    ...p.frontmatter,
+    slug: path.split("/").pop().replace(".md", ""),
+    content: p.default,
+  }))
+  .find(p => p.slug === slug);
+
+if (!post) {
+  throw new Error("Post not found");
+}
+---
+
+<BaseLayout title={post.title}>
+  <article class="prose max-w-none">
+    <h1>{post.title}</h1>
+    <p class="text-gray-600">{new Date(post.pubDate).toLocaleDateString()}</p>
+    <hr class="my-4" />
+    <div>
+      <post.content />
+    </div>
+  </article>
+</BaseLayout>

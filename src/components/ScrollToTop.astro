@@ -1,0 +1,25 @@
+---
+import { useState, useEffect } from "solid-js"; // optional, for reactive show/hide if using frameworks
+---
+
+<div id="scrollToTop" class="fixed bottom-6 right-6 hidden z-50">
+  <button
+    onclick="window.scrollTo({top: 0, behavior: 'smooth'});"
+    class="bg-blue-600 text-white p-3 rounded-full shadow hover:bg-blue-700 transition"
+  >
+    ↑
+  </button>
+</div>
+
+<script>
+  const btn = document.getElementById("scrollToTop");
+
+  // Show button when scrolling down
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 10) {
+      btn.classList.remove("hidden");
+    } else {
+      btn.classList.add("hidden");
+    }
+  });
+</script>

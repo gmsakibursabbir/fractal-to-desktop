@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Import all Markdown files
+const allPostFiles = import.meta.glob("../../posts/*.md", { eager: true });
+
+// Map the posts to get frontmatter + slug
+const allPosts = Object.entries(allPostFiles).map(([path, post]) => ({
+  ...post.frontmatter,
+  slug: path.split("/").pop().replace(".md", ""),
+}));
+
+// Sort by pubDate descending
+allPosts.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+---
+
+<BaseLayout title="Blog">
+  <section>
+    <h1 class="text-4xl font-bold mb-8">Blog</h1>
+    <ul class="space-y-6">
+      {allPosts.map(post => (
+        <li key={post.slug} class="border-b border-gray-300 pb-4">
+          <a href={`/blog/${post.slug}`} class="text-xl font-semibold text-blue-600 hover:underline">
+            {post.title}
+          </a>
+          <p class="text-gray-700">{post.description}</p>
+          <small class="text-gray-500">{new Date(post.pubDate).toLocaleDateString()}</small>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

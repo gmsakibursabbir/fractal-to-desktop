@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Home">
+  <section class="text-center py-20 bg-gradient-to-r from-purple-500 to-indigo-600 text-white">
+    <h1 class="text-5xl font-extrabold mb-6">1 Welcome to Fractal to Desktop</h1>
+    <p class="text-xl max-w-2xl mx-auto mb-8">
+      Explore beautiful fractals and bring them to life on your desktop. Fully responsive and modern design.
+    </p>
+    <a href="/blog" class="inline-block bg-white text-purple-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
+      Read our Blog
+    </a>
+  </section>
+
+  <section class="max-w-5xl mx-auto py-16 px-6">
+    <h2 class="text-3xl font-bold mb-6">Featured Fractals</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
+        <img src="/images/fractal1.jpg" alt="Fractal 1" class="rounded-lg mb-4" />
+        <h3 class="font-semibold text-lg">Fractal One</h3>
+        <p class="text-gray-600 mt-1">A stunning example of recursive beauty.</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
+        <img src="/images/fractal2.jpg" alt="Fractal 2" class="rounded-lg mb-4" />
+        <h3 class="font-semibold text-lg">Fractal Two</h3>
+        <p class="text-gray-600 mt-1">Complex patterns made simple.</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
+        <img src="/images/fractal3.jpg" alt="Fractal 3" class="rounded-lg mb-4" />
+        <h3 class="font-semibold text-lg">Fractal Three</h3>
+        <p class="text-gray-600 mt-1">Infinite depth in beautiful colors.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-100 py-16 px-6 text-center">
+    <h2 class="text-3xl font-bold mb-6">Get Started</h2>
+    <p class="text-lg max-w-xl mx-auto mb-6">
+      Browse our collection, read our blog, and bring fractals to your workspace. Fully responsive and easy to use.
+    </p>
+    <a href="/about" class="inline-block bg-purple-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-purple-700 transition">
+      Learn More
+    </a>
+  </section>
+</BaseLayout>
