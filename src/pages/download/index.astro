@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Math Page">
+  <section class=" py-10 lg:py-16 ">
+  
+      <div class="w-full lg:max-w-[1170px] mx-auto px-5 space-y-10 lg:space-y-16">
+        <div>
+          <h2 class="text-xl md:text-3xl font-semibold text-tblack font-poppins">Windows 8+ Downloads</h2>
+          <div class="flex flex-col lg:flex-row gap-5 lg:gap-10 mt-5 lg:mt-7">
+            <a href="https://s3.amazonaws.com/fractaltodesktop/Fractal+To+Desktop+v1.0.0+32-bit.msi" download class="bg-primary text-white hover:bg-greener transition text-[15px] uppercase font-semibold font-roboto hover:transform hover:scale-105 duration-500 rounded-sm  inline-flex flex-row item-center">
+              <div class="py-3 pl-4 pr-2 flex justify-center items-center"><img src="/images/windows.svg" alt="" class="w-[25px]"></div>
+              <div class="py-3 pl-2 pr-4 flex flex-col">
+                <h4 class="text-[15px] font-semibold">Windows 32-<span class="lowercase">bit</span></h4>
+                <h5 class="text-[11px] font-normal ">Version 1.0</h5>
+              </div>
+            </a>
+            <a href="https://s3.amazonaws.com/fractaltodesktop/Fractal+To+Desktop+v1.0.0+64-bit.msi" download class="bg-primary text-white hover:bg-greener transition text-[15px] uppercase font-semibold font-roboto hover:transform hover:scale-105 duration-500 rounded-sm  inline-flex flex-row item-center">
+              <div class="py-3 pl-4 pr-2 flex justify-center items-center"><img src="/images/windows.svg" alt="" class="w-[25px]"></div>
+              <div class="py-3 pl-2 pr-4 flex flex-col">
+                <h4 class="text-[15px] font-semibold">Windows 64-<span class="lowercase">bit</span></h4>
+                <h5 class="text-[11px] font-normal ">Version 1.0</h5>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h2 class="text-xl md:text-3xl font-semibold text-tblack font-poppins">Also Available on Steam!</h2>
+          <div class="">
+<div id="contenedor" class="mt-5 lg:mt-7">
+ <iframe src="https://store.steampowered.com/widget/942770/" frameborder="0" width="646" height="190"></iframe>
+</div>
+          </div>
+        </div>
+      </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,95 @@
+---
+/* Splide.js CDN-based full screen slider */
+---
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" />
+
+<div class="splide w-full" id="my-slider">
+  <div class="splide__track">
+    <ul class="splide__list">
+      <li class="splide__slide">
+        <img src="/images/149595-min.png" class="w-screen h-full object-fill" alt="Image 1">
+      </li>
+      <li class="splide__slide">
+        <img src="/images/153170-min.png" class="w-screen h-full object-fill" alt="Image 2">
+      </li>
+      <li class="splide__slide">
+        <img src="/images/463577-min.png" class="w-screen h-full object-fill" alt="Image 3">
+      </li>
+      <li class="splide__slide">
+        <img src="/images/542072-min.png" class="w-screen h-full object-fill" alt="Image 3">
+      </li>
+      <li class="splide__slide">
+        <img src="/images/829039-min.png" class="w-screen h-full object-fill" alt="Image 3">
+      </li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  #my-slider .splide__pagination {
+    bottom: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 6px 12px;
+    border-radius: 20px;
+    gap: 6px;
+  }
+  /* Remove default arrow content */
+#my-slider .splide__arrow::before {
+  content: "";
+}
+
+/* Previous arrow */
+#my-slider .splide__arrow--prev {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f104"; /* Font Awesome left arrow */
+  color: white;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.3);
+  border-radius: 50%;
+}
+
+/* Next arrow */
+#my-slider .splide__arrow--next {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f105"; /* Font Awesome right arrow */
+  color: white;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.3);
+  border-radius: 50%;
+}
+
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<script is:inline>
+document.addEventListener('DOMContentLoaded', function () {
+  const slider = new Splide('#my-slider', {
+    type: 'loop',
+    perPage: 1,
+    arrows: true,
+    pagination: true,
+    autoplay: true,
+  });
+
+  slider.on('pagination:mounted', function (data) {
+    data.list.forEach((item, index) => {
+      item.button.innerHTML = `<svg width="16" height="16" fill="white"><circle cx="8" cy="8" r="8"/></svg>`;
+    });
+  });
+
+  slider.mount();
+});
+</script>

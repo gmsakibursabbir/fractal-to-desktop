@@ -2,12 +2,12 @@
 import { useState, useEffect } from "solid-js"; // optional, for reactive show/hide if using frameworks
 ---
 
-<div id="scrollToTop" class="fixed bottom-6 right-6 hidden z-50">
+<div id="scrollToTop" class="fixed bottom-5 right-5 hidden z-100">
   <button
     onclick="window.scrollTo({top: 0, behavior: 'smooth'});"
-    class="bg-blue-600 text-white p-3 rounded-full shadow hover:bg-blue-700 transition"
+    class="bg-black/40 text-white p-2 shadow hover:bg-[#13aff0] transition cursor-pointer"
   >
-    ↑
+    <img src="/images/top-arrow-5-svgrepo-com.svg" alt="top arrow" class="w-5 md:w-6">
   </button>
 </div>
 

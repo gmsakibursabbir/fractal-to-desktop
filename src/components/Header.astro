@@ -2,15 +2,21 @@
 // no props needed for now, but you can add later
 ---
 
-<header class="bg-gray-900 text-white p-4">
-  <nav class="max-w-5xl mx-auto flex justify-between items-center">
-    <a href="/" class="font-bold text-lg">Fractal to Desktop</a>
-    <ul class="hidden md:flex space-x-6">
-      <li><a href="/" class="hover:underline">Home</a></li>
-      <li><a href="/about" class="hover:underline">About</a></li>
-      <li>  <a href="/math" class="hover:text-blue-500">Math</a></li>
-      <li><a href="/blog" class="hover:underline">Blog</a></li>
-      <li><a href="/contact" class="hover:underline">Contact</a></li>
+<header class=" text-white">
+  <nav class="lg:max-w-[1200px] px-5 py-5 mx-auto flex justify-between items-center font-open-sans ">
+    <a href="/" class="text-2xl lg:text-[30px]">Fractal to Desktop</a>
+    <ul class="hidden md:flex space-x-[30px]">
+      <li><a href="/" class="text-sm font-white hover:text-secondary">Home</a></li>
+      <li><a href="/math" class="text-sm font-white hover:text-secondary">Math</a></li>
+      <li><a href="/download" class="text-sm font-white hover:text-secondary">Download</a></li>
+      <li><a href="/download" class="text-sm font-white hover:text-secondary">Buy Now</a></li>
+      <li><a href="https://store.steampowered.com/app/942770/Fractal_To_Desktop/" target="_blank" class="text-sm font-white hover:text-secondary">Buy From Steam</a></li>
     </ul>
   </nav>
+  <section class="lg:pt-[60px] lg:pb-[80px] banner -mt-24 min-h-[523px] flex justify-center items-center flex-col">
+        <div class="px-5 mx-auto text-center">
+            <h1 class="text-[44px] md:text-[60px] lg:text-[79px] font-semibold text-center text-white mt-[60px] mb-[40px] lg:mb-[56px] font-roboto-condensed">Live Render Fractals To Your Desktop</h1>
+            <a href="#" class="inline-block bg-primary text-white px-12 py-3.5 hover:bg-greener transition text-[15px] uppercase font-semibold font-roboto hover:transform hover:scale-105 duration-500"> Buy Now</a>
+        </div>
+  </section>
 </header>

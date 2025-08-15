@@ -1,0 +1,102 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const allPostFiles = import.meta.glob("../../posts/*.md", { eager: true });
+
+  // Return array of params for each post
+  return Object.entries(allPostFiles).map(([path, post]) => ({
+    params: {
+      slug: path.split("/").pop().replace(".md", ""),
+    },
+  }));
+}
+
+const { slug } = Astro.params;
+const allPostFiles = import.meta.glob("../../posts/*.md", { eager: true });
+
+// Create array of posts with metadata
+const allPosts = Object.entries(allPostFiles).map(([path, p]) => ({
+  ...p.frontmatter,
+  slug: path.split("/").pop().replace(".md", ""),
+  content: p.default,
+}));
+
+// Sort posts by date (newest first)
+allPosts.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+
+// Find current post index
+const currentIndex = allPosts.findIndex((p) => p.slug === slug);
+const post = allPosts[currentIndex];
+
+// Previous and next posts (based on index)
+const prevPost =
+  currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+
+if (!post) {
+  throw new Error("Post not found");
+}
+---
+
+<BaseLayout title={post.title} class="bg-white">
+  <div class="w-full lg:max-w-[1170px] mx-auto px-5 py-10 lg:py-16">
+    <article class="prose max-w-none">
+      <h1 class="text-center text-[26px] lg:text-3xl font-open-sans font-bold">
+        {post.title}
+      </h1>
+      <div
+        class="flex flex-row justify-center items-center lg:justify-start pt-2 gap-2"
+      >
+        <img
+          src="/images/user-filled-svgrepo-com.svg"
+          alt=""
+          class="w-[13px]"
+        />
+        <span class="text-gray-600 text-sm font-open-sans">{post.author}</span>
+      </div>
+      <div class="pt-4 lg:pt-7 markdown-content font-open-sans">
+        <post.content />
+      </div>
+    </article>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center pt-10 border-t mt-10">
+      {
+        prevPost ? (
+          <a
+            href={`/math/${prevPost.slug}`}
+            class="text-black gap-1 hover:underline flex items-center font-roboto-condensed group"
+          >
+            <img
+              src="/images/previous-svgrepo-com.svg"
+              alt=""
+              class="w-4 transition-transform duration-200 group-hover:-translate-x-1"
+            />
+            {prevPost.title}
+          </a>
+        ) : (
+          <span />
+        )
+      }
+
+      {
+        nextPost ? (
+          <a
+            href={`/math/${nextPost.slug}`}
+            class="text-black gap-1 hover:underline flex items-center font-roboto-condensed group"
+          >
+            {nextPost.title}
+            <img
+              src="/images/next-svgrepo-com.svg"
+              alt=""
+              class="w-4 transition-transform duration-200 group-hover:translate-x-1"
+            />
+          </a>
+        ) : (
+          <span />
+        )
+      }
+    </div>
+  </div>
+</BaseLayout>
