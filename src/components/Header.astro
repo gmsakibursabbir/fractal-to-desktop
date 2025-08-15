@@ -1,22 +1,89 @@
 ---
-// no props needed for now, but you can add later
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/math", label: "Math" },
+  { href: "/download", label: "Download" },
+  { href: "#", label: "Buy Now" },
+  { href: "https://store.steampowered.com/app/942770/Fractal_To_Desktop/", label: "Buy From Steam", external: true },
+];
 ---
 
-<header class=" text-white">
-  <nav class="lg:max-w-[1200px] px-5 py-5 mx-auto flex justify-between items-center font-open-sans ">
-    <a href="/" class="text-2xl lg:text-[30px]">Fractal to Desktop</a>
+<header class="text-white">
+  <nav class="lg:max-w-[1200px] px-5 py-5 mx-auto flex justify-between items-center font-open-sans">
+    <!-- Logo -->
+    <a href="/" class="max-w-[140px] md:max-w-[160px]"><img src="/images/logo-white.png" alt=""></a>
+
+    <!-- Desktop Menu -->
     <ul class="hidden md:flex space-x-[30px]">
-      <li><a href="/" class="text-sm font-white hover:text-secondary">Home</a></li>
-      <li><a href="/math" class="text-sm font-white hover:text-secondary">Math</a></li>
-      <li><a href="/download" class="text-sm font-white hover:text-secondary">Download</a></li>
-      <li><a href="/download" class="text-sm font-white hover:text-secondary">Buy Now</a></li>
-      <li><a href="https://store.steampowered.com/app/942770/Fractal_To_Desktop/" target="_blank" class="text-sm font-white hover:text-secondary">Buy From Steam</a></li>
+      {navItems.map(item => (
+        <li>
+          <a 
+            href={item.href}
+            target={item.external ? "_blank" : "_self"}
+            class={`text-sm hover:text-secondary ${
+              currentPath === item.href ? "text-secondary font-bold" : "text-white"
+            }`}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
     </ul>
+
+    <!-- Mobile Hamburger -->
+    <button id="hamburger" class="md:hidden flex flex-col space-y-1 focus:outline-none">
+      <span class="w-6 h-0.5 bg-white"></span>
+      <span class="w-6 h-0.5 bg-white"></span>
+      <span class="w-6 h-0.5 bg-white"></span>
+    </button>
   </nav>
-  <section class="lg:pt-[60px] lg:pb-[80px] banner -mt-24 min-h-[523px] flex justify-center items-center flex-col">
+
+  <!-- Mobile Fullscreen Menu -->
+  <div id="mobileMenu" class="fixed inset-0 bg-black bg-opacity-95 hidden flex-col items-center justify-center z-50">
+    <!-- Close Button -->
+    <button id="closeMenu" class="absolute top-5 right-5 text-white text-3xl">&times;</button>
+
+    <!-- Menu Links -->
+    <ul class="flex flex-col space-y-6 text-center">
+      {navItems.map(item => (
+        <li>
+          <a 
+            href={item.href}
+            target={item.external ? "_blank" : "_self"}
+            class={`text-2xl hover:text-secondary ${
+              currentPath === item.href ? "text-secondary font-bold" : "text-white"
+            }`}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+    <section class="lg:pt-[60px] lg:pb-[80px] banner -mt-27 min-h-[523px] flex justify-center items-center flex-col">
         <div class="px-5 mx-auto text-center">
             <h1 class="text-[44px] md:text-[60px] lg:text-[79px] font-semibold text-center text-white mt-[60px] mb-[40px] lg:mb-[56px] font-roboto-condensed">Live Render Fractals To Your Desktop</h1>
             <a href="#" class="inline-block bg-primary text-white px-12 py-3.5 hover:bg-greener transition text-[15px] uppercase font-semibold font-roboto hover:transform hover:scale-105 duration-500"> Buy Now</a>
         </div>
   </section>
+
 </header>
+
+<!-- Script -->
+<script>
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const closeMenu = document.getElementById("closeMenu");
+
+  hamburger.addEventListener("click", () => {
+    mobileMenu.classList.remove("hidden");
+    mobileMenu.classList.add("flex");
+  });
+
+  closeMenu.addEventListener("click", () => {
+    mobileMenu.classList.remove("flex");
+    mobileMenu.classList.add("hidden");
+  });
+</script>
