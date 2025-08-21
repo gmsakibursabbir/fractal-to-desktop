@@ -6,34 +6,53 @@ const navItems = [
   { href: "/math", label: "Math" },
   { href: "/download", label: "Download" },
   { href: "#", label: "Buy Now" },
-  { href: "https://store.steampowered.com/app/942770/Fractal_To_Desktop/", label: "Buy From Steam", external: true },
+  {
+    href: "https://store.steampowered.com/app/942770/Fractal_To_Desktop/",
+    label: "Buy From Steam",
+    external: true,
+  },
 ];
 ---
 
 <header class="text-white">
-  <nav class="lg:max-w-[1200px] px-5 py-4 mx-auto flex justify-between items-center font-open-sans">
+  <nav
+    class="lg:max-w-[1200px] px-5 py-4 mx-auto flex justify-between items-center font-open-sans"
+  >
     <!-- Logo -->
-    <a href="/" class="max-w-[140px] md:max-w-[160px]"><img src="/images/logo-white.png" alt=""></a>
+    <a href="/" class="max-w-[140px] md:max-w-[160px]"
+      ><img src="/images/logo-white.png" alt="" /></a
+    >
 
     <!-- Desktop Menu -->
     <ul class="hidden md:flex space-x-[32px]">
-      {navItems.map(item => (
-        <li>
-          <a 
-            href={item.href}
-            target={item.external ? "_blank" : "_self"}
-            class={`text-sm hover:text-secondary ${
-              currentPath === item.href ? "text-secondary font-bold" : "text-white"
-            }`}
-          >
-            {item.label}
-          </a>
-        </li>
-      ))}
+      {
+        navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              target={item.external ? "_blank" : "_self"}
+              class={`text-sm hover:text-secondary ${
+                item.href === "/"
+                  ? currentPath === "/"
+                    ? "text-secondary font-bold"
+                    : "text-white"
+                  : currentPath.startsWith(item.href)
+                    ? "text-secondary font-bold"
+                    : "text-white"
+              }`}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
     </ul>
 
     <!-- Mobile Hamburger -->
-    <button id="hamburger" class="md:hidden flex flex-col space-y-1 focus:outline-none">
+    <button
+      id="hamburger"
+      class="md:hidden flex flex-col space-y-1 focus:outline-none"
+    >
       <span class="w-6 h-0.5 bg-white"></span>
       <span class="w-6 h-0.5 bg-white"></span>
       <span class="w-6 h-0.5 bg-white"></span>
@@ -41,40 +60,63 @@ const navItems = [
   </nav>
 
   <!-- Mobile Fullscreen Menu -->
-  <div id="mobileMenu" class="fixed inset-0 bg-black bg-opacity-95 hidden flex-col items-center justify-center z-50">
+  <div
+    id="mobileMenu"
+    class="fixed inset-0 bg-black bg-opacity-95 hidden flex-col items-center justify-center z-50"
+  >
     <!-- Close Button -->
-    <button id="closeMenu" class="absolute top-5 right-5 text-white text-3xl">&times;</button>
+    <button id="closeMenu" class="absolute top-5 right-5 text-white text-3xl"
+      >&times;</button
+    >
 
     <!-- Menu Links -->
     <ul class="flex flex-col space-y-6 text-center">
-      {navItems.map(item => (
-        <li>
-          <a 
-            href={item.href}
-            target={item.external ? "_blank" : "_self"}
-            class={`text-2xl hover:text-secondary ${
-              currentPath === item.href ? "text-secondary font-bold" : "text-white"
-            }`}
-          >
-            {item.label}
-          </a>
-        </li>
-      ))}
+      {
+        navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              target={item.external ? "_blank" : "_self"}
+              class={`text-sm hover:text-secondary ${
+                item.href === "/"
+                  ? currentPath === "/"
+                    ? "text-secondary font-bold"
+                    : "text-white"
+                  : currentPath.startsWith(item.href)
+                    ? "text-secondary font-bold"
+                    : "text-white"
+              }`}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </div>
-    <section class="lg:pt-[60px] lg:pb-[80px] banner -mt-26 min-h-[540px] flex justify-center items-center flex-col">
-        <div class="px-5 mx-auto text-center">
-            <h1 class="text-[44px] md:text-[60px] lg:text-[79px] font-semibold text-center text-white mt-[80px] mb-[40px] font-roboto-condensed leading-snug">Live Render Fractals To Your Desktop</h1>
-            <a href="#" class="inline-block bg-primary text-white px-12 py-3.5 hover:bg-greener transition text-[15px] uppercase font-semibold font-roboto hover:transform hover:scale-105 duration-500"> Buy Now</a>
-        </div>
+  <section
+    class="lg:pt-[60px] lg:pb-[80px] banner -mt-26 min-h-[540px] flex justify-center items-center flex-col"
+  >
+    <div class="px-5 mx-auto text-center">
+      <h1
+        class="text-[44px] md:text-[60px] lg:text-[79px] font-semibold text-center text-white mt-[80px] mb-[40px] font-roboto-condensed leading-snug"
+      >
+        Live Render Fractals To Your Desktop
+      </h1>
+      <a
+        href="#"
+        class="inline-block bg-primary text-white px-12 py-3.5 hover:bg-greener transition text-[15px] uppercase font-semibold font-roboto hover:transform hover:scale-105 duration-500"
+      >
+        Buy Now</a
+      >
+    </div>
   </section>
-
 </header>
 
 <!-- Script -->
- <script>
+<script>
   const links = document.querySelectorAll("nav a");
-  links.forEach(link => {
+  links.forEach((link) => {
     if (link.href === window.location.href) {
       link.classList.add("text-secondary", "font-bold");
     }
