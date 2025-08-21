@@ -45,7 +45,7 @@ And here’s one right next to it that tends towards 0:
 
 This is how we determine whether the point is within the Mandelbrot Set. If the point goes out to infinity, it’s outside of the set, and if the point stays near 0, it’s inside of the set. More specifically, if the point goes out beyond 2 (that’s where the purple circle is), it’s defined as gone to infinity, and if the point hits the maximum number of iterations and is less than 2, we just assume it won’t go to infinity and leave it as 0. In this case, the maximum number of iterations (remember that’s the number of times we put the point through Z^2+C) is 200.
 
-If you’d like to see these “orbits” (paths that points take in the Mandelbrot Set as they’re calculated), take a look at http://www.stefanbion.de/fraktal-generator/mandeliteration.html made by Stefan Bion. He’s on fractalforums.org along with a lot of other people who contribute to the Fractal community.
+If you’d like to see these “orbits” (paths that points take in the Mandelbrot Set as they’re calculated), take a look at [http://www.stefanbion.de/fraktal-generator/mandeliteration.html](http://www.stefanbion.de/fraktal-generator/mandeliteration.html) made by Stefan Bion. He’s on [fractalforums.org](https://fractalforums.org) along with a lot of other people who contribute to the Fractal community.
 
 ## Maximum Iterations
 
@@ -79,10 +79,10 @@ To determine the optimal maximum iteration, Fractal To Desktop starts off at 250
 
 ## Resources
 
-<a href="https://fractalforums.org/">Fractalforums.org</a> and <a href="https://fractalforums.com/">fractalforums.com</a> are great resources to find like-minded people who enjoy Fractals
+[Fractalforums.org](https://fractalforums.org/) and [fractalforums.com](https://fractalforums.com/) are great resources to find like-minded people who enjoy Fractals
 
-<a href="https://sourceforge.net/projects/xaos/">Xaos</a> is a great piece of software to view Fractals that’s easy to use and has a lot of features. Try pressing j and click on the Mandelbrot Set for one of my favorites.
+[Xaos](https://sourceforge.net/projects/xaos/) is a great piece of software to view Fractals that’s easy to use and has a lot of features. Try pressing j and click on the Mandelbrot Set for one of my favorites.
 
-<a href="https://mathr.co.uk">Mathr.co.uk</a> is also a very good resource. It’s run by a researcher named Claude Heiland-Allen. It has a ridiculous amount of code that’s really good, and it has tons of articles throughout the site that are very helpful. I even found drafts of a book he’s writing publicly available on his code repository on his site. The only problem is that there’s so much content, it’s hard to find what you’re looking for.
+[Mathr.co.uk](https://mathr.co.uk) is also a very good resource. It’s run by a researcher named Claude Heiland-Allen. It has a ridiculous amount of code that’s really good, and it has tons of articles throughout the site that are very helpful. I even found drafts of a book he’s writing publicly available on his code repository on his site. The only problem is that there’s so much content, it’s hard to find what you’re looking for.
 
-<a href="https://mrob.com/pub/muency.html">mrob.com/pub/muency</a> is another great site run by Robert Munafo. It has a lot of definitions defined in layman’s terms and algorithms described in ways that you can understand if you’re not a researcher. It’s very helpful. The site is very old, so newer discoveries aren’t on there.
+[mrob.com/pub/muency](https://mrob.com/pub/muency.html) is another great site run by Robert Munafo. It has a lot of definitions defined in layman’s terms and algorithms described in ways that you can understand if you’re not a researcher. It’s very helpful. The site is very old, so newer discoveries aren’t on there.

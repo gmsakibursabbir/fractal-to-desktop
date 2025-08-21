@@ -1,102 +1,55 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const allPostFiles = import.meta.glob("../../posts/*.md", { eager: true });
+  const posts = await getCollection("posts");
 
-  // Return array of params for each post
-  return Object.entries(allPostFiles).map(([path, post]) => ({
-    params: {
-      slug: path.split("/").pop().replace(".md", ""),
-    },
-  }));
+  // Sort posts by pubDate (newest first, adjust as you like)
+  posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  return posts.map((post, index) => {
+    return {
+      params: { slug: post.slug },
+      props: {
+        post,
+        prev: index < posts.length - 1 ? posts[index + 1] : null,
+        next: index > 0 ? posts[index - 1] : null,
+      },
+    };
+  });
 }
 
-const { slug } = Astro.params;
-const allPostFiles = import.meta.glob("../../posts/*.md", { eager: true });
-
-// Create array of posts with metadata
-const allPosts = Object.entries(allPostFiles).map(([path, p]) => ({
-  ...p.frontmatter,
-  slug: path.split("/").pop().replace(".md", ""),
-  content: p.default,
-}));
-
-// Sort posts by date (newest first)
-allPosts.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-
-// Find current post index
-const currentIndex = allPosts.findIndex((p) => p.slug === slug);
-const post = allPosts[currentIndex];
-
-// Previous and next posts (based on index)
-const prevPost =
-  currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
-const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
-
-if (!post) {
-  throw new Error("Post not found");
-}
+const { post, prev, next } = Astro.props;
+const { Content } = await post.render();
 ---
 
-<BaseLayout title={post.title} class="bg-white">
-  <div class="w-full lg:max-w-[1170px] mx-auto px-5 py-10 lg:py-16">
-    <article class="prose max-w-none">
-      <h1 class="text-center text-[26px] lg:text-3xl font-open-sans font-bold">
-        {post.title}
-      </h1>
-      <div
-        class="flex flex-row justify-center items-center lg:justify-start pt-2 gap-2"
-      >
-        <img
-          src="/images/user-filled-svgrepo-com.svg"
-          alt=""
-          class="w-[13px]"
-        />
-        <span class="text-gray-600 text-sm font-open-sans">{post.author}</span>
-      </div>
-      <div class="pt-4 lg:pt-7 markdown-content font-open-sans">
-        <post.content />
-      </div>
-    </article>
-
-    <!-- Navigation -->
-    <div class="flex justify-between items-center pt-10 border-t mt-10">
-      {
-        prevPost ? (
-          <a
-            href={`/math/${prevPost.slug}`}
-            class="text-black gap-1 hover:underline flex items-center font-roboto-condensed group"
-          >
-            <img
-              src="/images/previous-svgrepo-com.svg"
-              alt=""
-              class="w-4 transition-transform duration-200 group-hover:-translate-x-1"
-            />
-            {prevPost.title}
-          </a>
-        ) : (
-          <span />
-        )
-      }
-
-      {
-        nextPost ? (
-          <a
-            href={`/math/${nextPost.slug}`}
-            class="text-black gap-1 hover:underline flex items-center font-roboto-condensed group"
-          >
-            {nextPost.title}
-            <img
-              src="/images/next-svgrepo-com.svg"
-              alt=""
-              class="w-4 transition-transform duration-200 group-hover:translate-x-1"
-            />
-          </a>
-        ) : (
-          <span />
-        )
-      }
+<BaseLayout title={post.data.title}>
+  <article class="prose lg:prose-xl mx-auto py-10">
+      <div class="w-full lg:max-w-[1170px] mx-auto px-5">
+     <h1 class="text-center text-3xl font-bold font-open-sans">{post.data.title}</h1>
+    <p class="text-sm text-gray-500 flex flex-row"><img src="/images/user-filled-svgrepo-com.svg" alt="Calendar Icon" class="inline-block w-4 mr-2">
+      {post.data.author ?? "Unknown"} — {post.data.pubDate.toDateString()}
+    </p>
+    <div class="mt-6 markdown-content">
+      <Content />
     </div>
-  </div>
+    
+    <nav class="flex justify-between mt-12 pt-6 border-t">
+      {prev ? (
+        <a href={`/math/${prev.slug}`} class="text-sm text-black hover:underline inline-flex gap-1 group">
+          <img src="/images/previous-svgrepo-com.svg" alt="" class="inline-block w-3 group-hover:-translate-x-1 transition-transform duration-200" /> {prev.data.title}
+        </a>
+      ) : <span />}
+      
+      {next ? (
+        <a href={`/math/${next.slug}`} class="text-sm text-black hover:underline group inline-flex gap-1">
+          {next.data.title} <img src="/images/next-svgrepo-com.svg" alt="" class="inline-block w-3 group-hover:translate-x-1 transition-transform duration-200" />
+        </a>
+      ) : <span />}
+    </nav>
+   </div>
+
+
+  </article>
 </BaseLayout>

@@ -1,44 +1,47 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
-// Import all Markdown files
-const allPostFiles = import.meta.glob("../../posts/*.md", { eager: true });
+// Fetch posts from the content collection
+const allPosts = await getCollection("posts");
 
-// Map the posts to get frontmatter + slug
-const allPosts = Object.entries(allPostFiles).map(([path, post]) => ({
-  ...post.frontmatter,
-  slug: path.split("/").pop().replace(".md", ""),
-}));
-
-// Sort by pubDate descending
-allPosts.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+// Sort ascending by pubDate (oldest → newest)
+allPosts.sort((a, b) => a.data.pubDate.getTime() - b.data.pubDate.getTime());
 ---
 
-<BaseLayout title="Blog">
+<BaseLayout title="Math">
   <section class="w-full py-10 lg:py-16">
     <div class="w-full lg:max-w-[1170px] mx-auto px-5">
+
+      <!-- Posts -->
       <ul class="space-y-6 lg:space-y-7">
         {
-          allPosts.map((post) => (
-            <li key={post.slug} class="">
-              <h2
-                href={`/math/${post.slug}`}
-                class="text-lg font-bold text-[#333333] font-open-sans mb-1"
-              >
-                {post.title}
-              </h2>
-              <p class="text-[#929292] text-sm font-open-sans mb-4 line-clamp-5">{post.description}</p>
-              <a
-                href={`/math/${post.slug}`}
-                class="text-sm  inline-block font-open-sans font-semibold bg-[#000f51] hover:bg-transparent transition-colors ease-in-out duration-300 border border-[#000f51] px-4 py-2 text-white hover:text-[#333333]/80"
-              >
-                Read More
-              </a>
-            </li>
-          ))
+          allPosts.length > 0 ? (
+            allPosts.map((post) => (
+              <li>
+                <h2 class="text-lg font-bold text-[#333333] font-open-sans mb-1">
+                  <a href={`/math/${post.slug}`}>{post.data.title}</a>
+                </h2>
+                <p class="text-[#929292] text-sm font-open-sans mb-4 line-clamp-5">
+                  {post.data.description}
+                </p>
+                <a
+                  href={`/math/${post.slug}`}
+                  class="text-sm inline-block font-open-sans font-semibold bg-[#000f51] hover:bg-transparent transition-colors ease-in-out duration-300 border border-[#000f51] px-4 py-2 text-white hover:text-[#333333]/80"
+                >
+                  Read More
+                </a>
+              </li>
+            ))
+          ) : (
+            <li>No posts found.</li>
+          )
         }
       </ul>
-      <h3 class="text-lg font-roboto lg:text-xl font-semibold text-[#6ec1e4] mt-6 lg:mt-7">More to come soon!</h3>
+
+      <h3 class="text-lg font-roboto lg:text-xl font-semibold text-[#6ec1e4] mt-6 lg:mt-7">
+        More to come soon!
+      </h3>
     </div>
   </section>
 </BaseLayout>

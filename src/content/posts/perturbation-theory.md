@@ -1,6 +1,6 @@
 ---
 title: "Perturbation Theory"
-pubDate: "2025-08-13"
+pubDate: "2025-08-14"
 author: "Shirom Makkad"
 description: "Remember the program that I recommended in the last article called Xaos? If you downloaded that and zoomed in, you’ll notice that the screen gets very blurry. Here’s a picture of what I’m talking about: This problem has to do with the resolution of numbers inside a computer. Computers are either 32-bit or 64-bit and that corresponds to the size of the number the computer can use. The number of bits refer to the number of digits in base 2; a 64-bit number has ~15 digits in base 10 and 64 digits in base 2. As you zoom into the Mandelbrot Set, you need more precise numbers to show details. With a limit of 15 digits, you can’t show those details which causes the blurriness. We need to be able …"
 ---
@@ -19,7 +19,7 @@ We’ve established that Arbitrary precision is incredibly slow. We want to mini
 
 ## Perturbation Theory Basics
 
-Perturbation theory hinges on the principle that the difference between two large numbers can be represented by small numbers. For example (Example from <a href="http://mathr.co.uk/mandelbrot/perturbation.pdf">http://mathr.co.uk/mandelbrot/perturbation.pdf</a> by Claude Heiland-Allen)
+Perturbation theory hinges on the principle that the difference between two large numbers can be represented by small numbers. For example (Example from `[http://mathr.co.uk/mandelbrot/perturbation.pdf](http://mathr.co.uk/mandelbrot/perturbation.pdf)` by Claude Heiland-Allen)
 
 A = 123456798
 
