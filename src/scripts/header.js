@@ -22,7 +22,24 @@ function initHeader() {
       mobileMenu.classList.remove("flex");
       mobileMenu.classList.add("hidden");
     });
+
+    // Close menu when clicking a link (mobile only)
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("flex");
+        mobileMenu.classList.add("hidden");
+      });
+    });
+
+    // Hide menu if resizing to desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 768) {
+        mobileMenu.classList.remove("flex");
+        mobileMenu.classList.add("hidden");
+      }
+    });
   }
 }
 
-document.addEventListener("DOMContentLoaded", initHeader);
+// Remove DOMContentLoaded, Astro client:load guarantees DOM is ready
+initHeader();
