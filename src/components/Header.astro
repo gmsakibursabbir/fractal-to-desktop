@@ -116,7 +116,39 @@ const navItems = [
 </header>
 
 <!-- Script -->
-<script type="module" client:load>
-  import initHeader from '../scripts/header.js';
-  initHeader();
+<!-- Script -->
+<script is:inline client:load>
+  // Highlight active nav link (optional, since Astro does this server-side)
+  // Mobile menu toggle
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const closeMenu = document.getElementById("closeMenu");
+
+  if (hamburger && mobileMenu && closeMenu) {
+    hamburger.addEventListener("click", () => {
+      mobileMenu.classList.remove("hidden");
+      mobileMenu.classList.add("flex");
+    });
+
+    closeMenu.addEventListener("click", () => {
+      mobileMenu.classList.remove("flex");
+      mobileMenu.classList.add("hidden");
+    });
+
+    // Close menu when clicking a link (mobile only)
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("flex");
+        mobileMenu.classList.add("hidden");
+      });
+    });
+
+    // Hide menu if resizing to desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 768) {
+        mobileMenu.classList.remove("flex");
+        mobileMenu.classList.add("hidden");
+      }
+    });
+  }
 </script>
