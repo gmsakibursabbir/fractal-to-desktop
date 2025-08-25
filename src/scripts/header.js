@@ -1,4 +1,4 @@
-function initHeader() {
+export default function initHeader() {
   // Highlight active nav link
   const links = document.querySelectorAll("nav a");
   links.forEach((link) => {
@@ -40,6 +40,3 @@ function initHeader() {
     });
   }
 }
-
-// Remove DOMContentLoaded, Astro client:load guarantees DOM is ready
-initHeader();
