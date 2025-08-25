@@ -1,0 +1,22 @@
+{
+  "html.validate.scripts": false,
+  "html.validate.styles": false,
+  "typescript.validate.enable": false,
+  "css.validate": false,
+  "eslint.enable": false,
+  "files.exclude": {
+    "node_modules": true,
+    "dist": true
+  },
+  "[astro]": {
+    "editor.defaultFormatter": "astro.build.astro-vscode",
+    "editor.quickSuggestions": true
+  },
+  "files.associations": {
+    "*.css": "tailwindcss",
+    "*.astro": "astro"
+  },
+  "tailwindCSS.includeLanguages": {
+    "astro": "html"
+  }
+}

@@ -1,5 +1,6 @@
 ---
-const currentPath = Astro.url.pathname;
+const url = new URL(Astro.request.url);
+const currentPath = url.pathname;
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -12,6 +13,7 @@ const navItems = [
     external: true,
   },
 ];
+
 ---
 
 <header class="text-white">
@@ -77,7 +79,7 @@ const navItems = [
             <a
               href={item.href}
               target={item.external ? "_blank" : "_self"}
-              class={`text-sm hover:text-secondary ${
+              class={`text-lg hover:text-secondary ${
                 item.href === "/"
                   ? currentPath === "/"
                     ? "text-secondary font-bold"
@@ -114,27 +116,4 @@ const navItems = [
 </header>
 
 <!-- Script -->
-<script>
-  const links = document.querySelectorAll("nav a");
-  links.forEach((link) => {
-    if (link.href === window.location.href) {
-      link.classList.add("text-secondary", "font-bold");
-    }
-  });
-</script>
-
-<script>
-  const hamburger = document.getElementById("hamburger");
-  const mobileMenu = document.getElementById("mobileMenu");
-  const closeMenu = document.getElementById("closeMenu");
-
-  hamburger.addEventListener("click", () => {
-    mobileMenu.classList.remove("hidden");
-    mobileMenu.classList.add("flex");
-  });
-
-  closeMenu.addEventListener("click", () => {
-    mobileMenu.classList.remove("flex");
-    mobileMenu.classList.add("hidden");
-  });
-</script>
+<script src="/src/scripts/header.js" client:load></script>

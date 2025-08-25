@@ -1,5 +1,3 @@
-@tailwind base;
-@tailwind components;
 @tailwind utilities;
 @import "tailwindcss";
 
@@ -49,10 +47,13 @@
 }
 
 .markdown-content img {
-  @apply block w-full lg:w-[45%] h-full object-cover mx-auto my-6 rounded-lg;
+  @apply block w-full max-w-full lg:w-[45%] h-full object-cover mx-auto my-6 rounded-lg;
 }
 
-/* Optional: lists and blockquotes */
+.markdown-content {
+  @apply overflow-x-hidden;
+}
+
 .markdown-content ul {
   @apply list-disc list-inside mb-4;
 }
